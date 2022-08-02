@@ -16,7 +16,7 @@ const UpdateBlog = () => {
     console.log(comments)
 
     useEffect(()=> {
-        fetch(`http://localhost:5000/update/${id}`)
+        fetch(`https://morning-peak-89296.herokuapp.com/update/${id}`)
         .then(res => res.json())
         .then(data =>{
             setBlog(data);
@@ -44,9 +44,8 @@ const UpdateBlog = () => {
     const handleUpdate =(e) => {
         e.preventDefault();
         const updatedBlog = {heading, description, complete, comments}
-        console.log(updatedBlog)
 
-        fetch(`http://localhost:5000/update/${id}`,
+        fetch(`https://morning-peak-89296.herokuapp.com/update/${id}`,
         {
             method: 'PATCH',
             headers: {

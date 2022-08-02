@@ -12,7 +12,7 @@ const DisplayBlog = ({blog}) => {
     }
 
     const handleDelete = () => {
-        fetch(`http://localhost:5000/blog/${id}`,
+        fetch(`https://morning-peak-89296.herokuapp.com/blog/${id}`,
         {
             method: 'DELETE',
            
@@ -29,7 +29,28 @@ const DisplayBlog = ({blog}) => {
     };
 
     const handleComment =(e) => {
-        console.log(e);
+        e.preventDefault();
+        const newComments = (e.target.comment.value);
+        const comments = [...blog.comments, newComments]
+
+        fetch(`http://localhost:5000/comment/${id}`,
+        {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({comments})
+        })
+        .then(res => res.json())
+        .then(inserted => {
+            if(inserted.acknowledged === true){
+                toast.success('Comment Successfull');
+            }
+            else{
+                toast.error('Failed to Comment')
+            }
+        });
+        e.target.reset();
     }
 
     const navigateToUpdate =()=>{
@@ -60,9 +81,21 @@ const DisplayBlog = ({blog}) => {
                     </div>
                     <div className='mt-2 text-center'>
                         <form onSubmit={handleComment}>
-                            <input class="input input-success md:w-2/3" placeholder="Please Comment"></input>
+                            <input class="input input-success md:w-2/3" name='comment' placeholder="Please Comment"></input>
                             <input type="submit" value="Comment" className='btn ml-2'/>
                         </form>
+                    </div>
+                    <div className='ml-4 mt-4'>
+                            {
+                                (blog.comments).map(comment => <div  className='flex p-2 items-center'>
+                                    <div class="avatar mr-2">
+                                        <div class="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img src="https://i.ibb.co/WF1RNZF/man1.jpg" alt='avatar' />
+                                        </div>
+                                    </div>
+                                    <p>{comment}</p>
+                                </div>)
+                            }
                     </div>
                 </div>
             </div>

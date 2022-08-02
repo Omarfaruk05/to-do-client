@@ -11,7 +11,7 @@ const AddToDo = () => {
         const blog = {heading, description, complete, comments};
         console.log(blog)
         
-        fetch("http://localhost:5000/blog",
+        fetch("https://morning-peak-89296.herokuapp.com/blog",
         {
             method: 'POST',
             headers: {
