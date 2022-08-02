@@ -21,10 +21,8 @@ const AddToDo = () => {
         })
         .then(res => res.json())
         .then(inserted => {
-            console.log(inserted)
             if(inserted.insertedId){
                 toast.success('Blog Added');
-                // refetch();
             }
             else{
                 toast.error('Failed to Add Blog')
@@ -36,7 +34,7 @@ const AddToDo = () => {
 
     return (
         <div className='flex items-center justify-center py-8'>
-            <label htmlFor="add-modal" className="btn btn-wide bg-secondary text-white">Add New Data</label>
+            <label htmlFor="add-modal" className="btn btn-wide bg-secondary text-white">Add New Blog</label>
 
             <input type="checkbox" id="add-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
@@ -49,7 +47,7 @@ const AddToDo = () => {
                             <div class="form-control">
                                 <label class="label cursor-pointer w-20">
                                     <span class="label-text font-semibold mr-2">Complete</span>
-                                    <input onClick={()=> setComplete(!complete)} type="checkbox" class="toggle toggle-accent" unchecked />
+                                    <input onClick={()=> setComplete(!complete)} type="checkbox" class="toggle toggle-accent"/>
                                 </label>
                             </div>
                             <br />
